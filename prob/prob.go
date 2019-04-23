@@ -10,11 +10,11 @@ func New(p float64) <-chan bool {
 	ch := make(chan bool)
 	go func() {
 		defer close(ch)
-		max := 10000
+		max := 1000000
 		limit := percent(p, max)
 		rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
 		for {
-			n := rnd.Intn(max)
+			n := rnd.Intn(max) + 1
 			ch <- n < limit
 		}
 	}()
